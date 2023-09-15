@@ -1,3 +1,4 @@
+// Admin
 class AdestradorModel {
 
     /**
@@ -7,7 +8,7 @@ class AdestradorModel {
      * @param {string} status 
      * @param {string} pessoachavestrangeira 
      */
-    
+
         constructor(id,formacao,status,pessoachavestrangeira){
             this.id= id
             this.formacao= formacao
