@@ -9,8 +9,6 @@ class ClienteModel {
     * @param {string} endereco 
     */
 
-    /* Ver utilidade desses parametros depois */
-
    constructor(email, senha, nome, telefone, endereco){
        this.email = email
        this.senha = senha
