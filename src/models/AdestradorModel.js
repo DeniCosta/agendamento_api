@@ -3,17 +3,16 @@ class AdestradorModel {
 
     /**
      * 
-     * @param {number} id 
+     * @param {string} nome
      * @param {string} formacao 
-     * @param {string} status 
-     * @param {string} pessoachavestrangeira 
-     */
-
-        constructor(id,formacao,status,pessoachavestrangeira){
-            this.id= id
+     * @param {number} id_agendamento 
+     * @param {number} id_endereco 
+*/
+        constructor(nome,formacao,id_agendamento,id_endereco){
+            this.nome=nome
             this.formacao= formacao
-            this.status= status
-            this.pessoachavestrangeira= pessoachavestrangeira
+            this.id_agendamento=id_agendamento
+            this.id_endereco=id_endereco
         }
     }
     
