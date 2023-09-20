@@ -70,8 +70,8 @@ class EnderecoController {
             try {
                 ValidacaoServices.validaCamposEndereco(body.cep, body.numero, body.complemento)
                 await ValidacaoServices.validarExistencia(id)
-                const enderecoModelado = new UsuariosModel(body.cep, body.numero, body.complemento)
-                UsuariosDAO.AtualizarEnderecoPorId(id, enderecoModelado)
+                const enderecoModelado = new EnderecoModel(body.cep, body.numero, body.complemento)
+                EnderecoDAO.AtualizarEnderecoPorId(id, enderecoModelado)
                 res.status(204).json()
             } catch (error) {
                 if(error.message == "Campos invalidos"){

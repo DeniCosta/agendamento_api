@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS "Adestrador" (
 /**
  * script de inserção de dados base
  */
-const ADD__DATA = `
+const ADD_ADESTRADOR_DATA = `
 INSERT INTO Adestrador (nome,formacao,id_agendamento,id_endereco)
 VALUES 
     ('DA Cruz','Auxiliar de veterinário',1,1),
@@ -95,7 +95,57 @@ function populaTabelaAdestrador() {
             console.log("Erro ao popular tabela de adestrador")
         }
         else {
-            console.log("Tabela Adestrador populada !")
+            console.log("Tabela Adestrador populada!")
+        }
+    });
+}
+
+/**
+ * Script sql de criação da tabela Adestrador 
+ */
+const ENDERECO_TABLE = `
+CREATE TABLE IF NOT EXISTS "Endereco" (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    "CEP" varchar(64) ,
+    "NUMERO" varchar(64),
+    "COMPLEMENTO" varchar(64)
+);
+`
+
+/**
+ * script de inserção de dados base
+ */
+const ADD_ENDERECO_DATA = `
+INSERT INTO Endereco (CEP, numero, complemento)
+VALUES 
+    ('83232331','19410','Casa 3'),
+    (',
+
+`
+
+/**
+ * Function que aplica a criação da tabela Adestrador via SQLite
+ */
+function criaTabelaEndereco() {
+    Database.run(ENDERECO_TABLE, (error) => {
+        if (error) {
+            console.log("Erro ao criar tabela de endereço")
+        } else {
+            console.log("Tabela Endereço criada!")
+        }
+    });
+}
+
+/**
+ * Function que polula via SQLite a tabela ADESTRADOR
+ */
+function populaTabelaEndereco() {
+    Database.run(ADD_ENDERECO_DATA, (error) => {
+        if (error) {
+            console.log("Erro ao criar tabela de endereço")
+        }
+        else {
+            console.log("Tabela Endereço criada!")
         }
     });
 }
@@ -105,8 +155,12 @@ function populaTabelaAdestrador() {
 Database.serialize(()=>{
     criaTabelaClientes();
     populaTabelaClientes();
+    
     criaTabelaAdestrador();
     populaTabelaAdestrador();
+    
+    criaTabelaEndereco();
+    populaTabelaEndereco();
 });
 
 
