@@ -49,7 +49,7 @@ class EnderecoController {
         app.post("/endereco", async (req, res) => {
             const body = Object.values(req.body)
             try {
-                ValidacaoServices.validaCamposUsuario(...body)
+                ValidacaoServices.validaCamposEndereco(...body)
                 const enderecoModelado = new EnderecoModel(...body)
                 await EnderecoDAO.inserirEndereco(enderecoModelado)
                 res.status(201).json({
@@ -70,7 +70,7 @@ class EnderecoController {
             try {
                 ValidacaoServices.validaCamposEndereco(body.cep, body.numero, body.complemento)
                 await ValidacaoServices.validarExistencia(id)
-                const usuarioModelado = new UsuariosModel(body.cep, body.numero, body.complemento)
+                const enderecoModelado = new UsuariosModel(body.cep, body.numero, body.complemento)
                 UsuariosDAO.AtualizarEnderecoPorId(id, enderecoModelado)
                 res.status(204).json()
             } catch (error) {
