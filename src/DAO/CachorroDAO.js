@@ -10,7 +10,7 @@ class CachorroDAO extends DAO {
   static async inserirCachorro(data) {
     const dataValues = Object.values(data)
     const query = `
-        INSERT INTO Cachorro (nome, raca, cor, sexo, porte, peso, temperamento, statusVacina) VALUES (?, ?, ?, ?, ?, ?, ?, ?))
+        INSERT INTO Cachorro (nome, raca, cor, sexo, porte, peso, temperamento, statusVacina, proprietario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?))
         `
     const result = await this.inserir(query, dataValues)
     return result

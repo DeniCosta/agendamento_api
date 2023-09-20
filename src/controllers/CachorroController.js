@@ -54,9 +54,9 @@ class CachorroController {
       const id = req.params.id
       const body = req.body
       try {
-        ValidacaoServices.validaCamposCachorro(body.nome, body.raca, body.cor, body.sexo, body.porte, body.peso, body.temperamento, body.statusVacina)
+        ValidacaoServices.validaCamposCachorro(body.nome, body.raca, body.cor, body.sexo, body.porte, body.peso, body.temperamento, body.statusVacina, body.proprietario)
         await ValidacaoServices.validarExistencia(id)
-        const cachorroModelado = new CachorroModel(body.nome, body.raca, body.cor, body.sexo, body.porte, body.peso, body.temperamento, body.statusVacina)
+        const cachorroModelado = new CachorroModel(body.nome, body.raca, body.cor, body.sexo, body.porte, body.peso, body.temperamento, body.statusVacina, body.proprietario)
         CachorroDAO.AtualizarcachorroPorId(id, cachorroModelado)
         res.status(204).json()
       } catch (error) {
