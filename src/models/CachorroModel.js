@@ -14,7 +14,7 @@ class CachorroModel {
    * @param {string} proprietario fk
    */
 
-  constructor(id, nome, raca, cor, sexo, porte, peso, temperamento, statusVacina, proprietario) {
+  constructor(id, nome, raca, cor, sexo, porte, peso, temperamento, statusVacina) {
     this.id = id
     this.nome = nome
     this.raca = raca
@@ -24,7 +24,6 @@ class CachorroModel {
     this.peso = peso
     this.temperamento = temperamento
     this.statusVacina = statusVacina
-    this.proprietario = proprietario
   }
 }
 
