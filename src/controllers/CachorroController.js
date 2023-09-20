@@ -1,4 +1,5 @@
 import CachorroModel from "../model/CachorroModel.js";
+import CachorroDAO from "../DAO/CachorroDAO.js"
 // import DatabaseMetodos from "../utils/DatabaseMetodos.js";
 
 class CachorroController {
@@ -9,14 +10,14 @@ class CachorroController {
   static rotas(app) {
 
     app.get("/cachorro", async (req, res) => {
-      const cachorro = await cachorroDAO.buscarTodosOscachorros()
+      const cachorro = await CachorroDAO.buscarTodosOscachorros()
       res.status(200).json(cachorro)
     })
 
     app.get("/cachorro/:id", async (req, res) => {
       const id = req.params.id
       try {
-        const resposta = await cachorroDAO.buscarcachorroPorId(id)
+        const resposta = await CachorroDAO.buscarcachorroPorId(id)
         res.status(200).json(resposta)
       } catch (error) {
         res.status(404).json({ id: id, ...error })
@@ -27,7 +28,7 @@ class CachorroController {
       const id = req.params.id
       try {
         await ValidacaoServices.validarExistencia(id)
-        cachorroDAO.deletarcachorroPorId(id)
+        CachorroDAO.deletarcachorroPorId(id)
         res.status(200).json({ error: false })
       } catch (error) {
         res.status(404).json({ id: id, ...error })
@@ -38,8 +39,8 @@ class CachorroController {
       const body = Object.values(req.body)
       try {
         ValidacaoServices.validaCamposCachorro(...body)
-        const cachorroModelado = new cachorroModel(...body)
-        await cachorroDAO.inserircachorro(cachorroModelado)
+        const cachorroModelado = new CachorroModel(...body)
+        await CachorroDAO.inserirCachorro(cachorroModelado)
         res.status(201).json({
           error: false,
           message: "Novo cachorro inserido no banco de dados"
@@ -55,8 +56,8 @@ class CachorroController {
       try {
         ValidacaoServices.validaCamposCachorro(body.nome, body.raca, body.cor, body.sexo, body.porte, body.peso, body.temperamento, body.statusVacina, body.proprietario)
         await ValidacaoServices.validarExistencia(id)
-        const cachorroModelado = new cachorroModel(body.nome, body.raca, body.cor, body.sexo, body.porte, body.peso, body.temperamento, body.statusVacina, body.proprietario)
-        UsuariosDAO.AtualizarcachorroPorId(id, cachorroModelado)
+        const cachorroModelado = new CachorroModel(body.nome, body.raca, body.cor, body.sexo, body.porte, body.peso, body.temperamento, body.statusVacina, body.proprietario)
+        CachorroDAO.AtualizarcachorroPorId(id, cachorroModelado)
         res.status(204).json()
       } catch (error) {
         if (error.message == "Campos invalidos") {
