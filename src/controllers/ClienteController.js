@@ -77,7 +77,7 @@ class ClientesController {
                 ValidacaoServices.validaCamposCliente(body.NOME, body.EMAIL, body.TELEFONE, body.ID_ENDERECO)
                 await ValidacaoServices.validarExistencia(id)
                 const clienteModelado = new ClienteModel(body.NOME, body.EMAIL, body.TELEFONE, body.ID_ENDERECO)
-                UsuariosDAO.AtualizarUsuarioPorId(id, clienteModelado)
+                await ClienteDAO.AtualizarClientePorId(id, clienteModelado)
                 res.status(204).json()
             } catch (error) {
                 if(error.message == "Campos invalidos"){
