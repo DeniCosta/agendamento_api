@@ -51,7 +51,7 @@ class EnderecoController {
             try {
                 ValidacaoServices.validaCamposUsuario(...body)
                 const enderecoModelado = new EnderecoModel(...body)
-                await EnderecoDAO.inserirUsuario(enderecoModelado)
+                await EnderecoDAO.inserirEndereco(enderecoModelado)
                 res.status(201).json({
                     error: false,
                     message: "Endereço adicioando com sucesso"
@@ -68,10 +68,10 @@ class EnderecoController {
             const id = req.params.id
             const body = req.body
             try {
-                ValidacaoServices.validaCamposUsuario(body.nome, body.email, body.telefone)
+                ValidacaoServices.validaCamposEndereco(body.cep, body.numero, body.complemento)
                 await ValidacaoServices.validarExistencia(id)
-                const usuarioModelado = new UsuariosModel(body.nome, body.email, body.telefone)
-                UsuariosDAO.AtualizarUsuarioPorId(id, usuarioModelado)
+                const usuarioModelado = new UsuariosModel(body.cep, body.numero, body.complemento)
+                UsuariosDAO.AtualizarEnderecoPorId(id, enderecoModelado)
                 res.status(204).json()
             } catch (error) {
                 if(error.message == "Campos invalidos"){
