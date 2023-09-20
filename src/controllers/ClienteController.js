@@ -1,5 +1,5 @@
 import ClienteModel from "../models/ClienteModel.js";
-import ValidacaoServicesCliente from "../services/ValidacaoServicesCliente.js";
+import ValidacaoServices from "../services/ValidacaoServices.js";
 import ClienteDAO from "../DAO/ClienteDAO.js";
 
 class ClientesController {
