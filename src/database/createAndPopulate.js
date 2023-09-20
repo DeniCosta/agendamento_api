@@ -50,16 +50,6 @@ function populaTabelaClientes() {
 }
 
 /**
- * Roda as funções de criação de tabela e população em série (uma após a outra)
- */
-Database.serialize(()=>{
-    criaTabelaClientes();
-    populaTabelaClientes();
-});
-
-import Database from "./Database.js";
-
-/**
  * Script sql de criação da tabela Adestrador 
  */
 const ADESTRADOR_TABLE = `
@@ -109,12 +99,19 @@ function populaTabelaAdestrador() {
         }
     });
 }
-
-
 /**
- * Roda as funções de criação de tabela e população em serie (Uma após a outra)
+ * Roda as funções de criação de tabela e população em série (uma após a outra)
  */
-Database.serialize(() => {
+Database.serialize(()=>{
+    criaTabelaClientes();
+    populaTabelaClientes();
     criaTabelaAdestrador();
     populaTabelaAdestrador();
-})
+});
+
+
+
+
+
+
+
