@@ -1,4 +1,5 @@
-import CachorroModel from "../model/CachorroModel.js";
+import CachorroModel from "../models/CachorroModel.js"
+import CachorroDAO from "../DAO/CachorroDAO.js";
 // import DatabaseMetodos from "../utils/DatabaseMetodos.js";
 
 class CachorroController {
@@ -38,7 +39,7 @@ class CachorroController {
       const body = Object.values(req.body)
       try {
         ValidacaoServices.validaCamposCachorro(...body)
-        const cachorroModelado = new cachorroModel(...body)
+        const cachorroModelado = new CachorroModel(...body)
         await cachorroDAO.inserircachorro(cachorroModelado)
         res.status(201).json({
           error: false,
@@ -55,8 +56,8 @@ class CachorroController {
       try {
         ValidacaoServices.validaCamposCachorro(body.nome, body.raca, body.cor, body.sexo, body.porte, body.peso, body.temperamento, body.statusVacina, body.proprietario)
         await ValidacaoServices.validarExistencia(id)
-        const cachorroModelado = new cachorroModel(body.nome, body.raca, body.cor, body.sexo, body.porte, body.peso, body.temperamento, body.statusVacina, body.proprietario)
-        UsuariosDAO.AtualizarcachorroPorId(id, cachorroModelado)
+        const cachorroModelado = new CachorroModel(body.nome, body.raca, body.cor, body.sexo, body.porte, body.peso, body.temperamento, body.statusVacina, body.proprietario)
+        CachorroDAO.AtualizarcachorroPorId(id, cachorroModelado)
         res.status(204).json()
       } catch (error) {
         if (error.message == "Campos invalidos") {
