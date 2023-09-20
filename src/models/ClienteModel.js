@@ -1,21 +1,20 @@
-class ClienteModel {
-
+/**
+ * Objeto modelo para cliente
+ */
+class ClienteModel{
     /**
-    * Construtor do objeto modelo para usuários
-    * @param {string} email 
-    * @param {string} senha 
-    * @param {string} nome 
-    * @param {string} telefone 
-    * @param {string} endereco 
-    */
-
-   constructor(email, senha, nome, telefone, endereco){
-       this.email = email
-       this.senha = senha
-       this.nome = nome
-       this.telefone = telefone
-       this.endereco = endereco /* Essa é pra ser uma chave estrangeira (FK) */
-   }
+     * Construtor do objeto modelo para cliente
+     * @param {text} nome 
+     * @param {text} email 
+     * @param {integer} telefone 
+     * @param {integer} id_endereco
+     */
+    constructor(nome, email, telefone, id_endereco){
+        this.nome = nome
+        this.email = email
+        this.telefone = telefone
+        this.id_endereco = id_endereco
+    }
 }
 
-export default ClienteModel
+export default ClienteModel;
