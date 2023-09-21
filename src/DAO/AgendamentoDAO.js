@@ -1,7 +1,7 @@
-import AgendamentoModel from "../AgendamentoDAO.js";
+import AgendamentoModel from "../models/AgendamentoModel.js";
 import DAO from "./DAO.js";
 
-const Agendamento_TABELA = "Agendamento"
+const AGENDAMENTO_TABELA = "Agendamento"
 
 class AgendamentoDAO extends DAO{
     /**
@@ -16,37 +16,46 @@ class AgendamentoDAO extends DAO{
         return result
     }
 
+    
     /**
      * @returns {Array<AgendamentoModel>}
      */
-    static async buscarTodosOs(){
-        return await this.buscar(Agendamento_TABELA)
+    static async buscarTodosEmAgendamento(){
+        const query = `
+        SELECT * FROM ${AGENDAMENTO_TABELA};
+        `;
+        return await this.buscar(query);
     }
 
     /**
-     * Método de busca de registros específicos na tabela Agendamento através de um identificador
+     * Método de busca de registros específicos na tabela Usuários através de um identificador
      * @param {string} id 
      * @returns {AgendamentoModel}
      */
-    static buscarAgendamentoPorId(id){
-        return this.buscarPorId(Agendamento_TABELA, id)
+    static async buscarAgendamentoPorId(id) {
+        const query = `
+        SELECT * FROM ${AGENDAMENTO_TABELA} where ID = ?;
+        `;
+        return await this.buscarPorId(query, id);
     }
 
     /**
-     * Método de deleção de registros específicos na tabela Agendamento através de um identificador
+     * Método de deleção de registros específicos na tabela Adestrador através de um identificador
      * @param {string} id 
      */
-    static deletarAgendamentoPorId(id){
-        this.deletarPorId(Agendamento_TABELA, id)
+    static async deletarAgendamentoPorId(id) {
+        const query = `DELETE FROM ${AGENDAMENTO_TABELA} WHERE ID = ?;`;
+        await this.deletarPorId(query, id);
     }
 
     /**
-     * Atualiza um registro específico da tabela Agendamento através de um identificador
+     * Atualiza um registro específico da tabela Adestrador através de um identificador
      * @param {string} id 
      * @param {any} data 
      */
-    static AtualizarAgendamentoPorId(id, data){
-        this.atualizarPorId(Agendamento_TABELA, id, data)
+    static async AtualizarAgendamentoPorId(id, data) {
+        const query = `UPDATE ${AGENDAMENTO_TABELA} SET DURACAO=?, DIA=?, HORA=?, ID_CACHORRO=?,  ID_ADESTRADOR=? WHERE ID=?;`;
+        await this.atualizarPorId(query, [...Object.values(data), id]);
     }
 }
 
