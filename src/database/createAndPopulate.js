@@ -57,8 +57,8 @@ CREATE TABLE IF NOT EXISTS "Adestrador" (
     ID INTEGER PRIMARY KEY AUTOINCREMENT,
     "NOME" varchar(64) ,
     "FORMACAO" varchar(64),
-    "ID_AGENDAMENTO"INTEGER, 
-    "ID_Endereco"INTEGER , 
+    "ID_AGENDAMENTO" INTEGER, 
+    "ID_Endereco" INTEGER 
 );
 `
 
@@ -68,8 +68,7 @@ CREATE TABLE IF NOT EXISTS "Adestrador" (
 const ADD_ADESTRADOR_DATA = `
 INSERT INTO Adestrador (nome,formacao,id_agendamento,id_endereco)
 VALUES 
-    ('DA Cruz','Auxiliar de veterinário',1,1),
-    (',
+    ('DA Cruz','Auxiliar de veterinário',1,1)
 
 `
 
@@ -118,8 +117,7 @@ CREATE TABLE IF NOT EXISTS "Endereco" (
 const ADD_ENDERECO_DATA = `
 INSERT INTO Endereco (CEP, numero, complemento)
 VALUES 
-    ('83232331','19410','Casa 3'),
-    (',
+    ('83232331','19410','Casa 3')
 
 `
 
@@ -145,7 +143,109 @@ function populaTabelaEndereco() {
             console.log("Erro ao criar tabela de endereço")
         }
         else {
-            console.log("Tabela Endereço criada!")
+            console.log("Tabela Endereço populada!")
+        }
+    });
+}
+
+/**
+ * Script sql de criação da tabela Adestrador 
+ */
+const CACHORRO_TABLE = `
+CREATE TABLE IF NOT EXISTS "Cachorro" (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    "nome" varchar(64),
+    "raca" varchar(64),
+    "cor" varchar(64),
+    "sexo" varchar(64),
+    "peso" varchar(64)
+);
+`
+
+/**
+ * script de inserção de dados base
+ */
+const ADD_CACHORRO_DATA = `
+INSERT INTO Cachorro (nome, raca, cor, sexo, peso)
+VALUES 
+    ('toto','salsicha','preto', 'macho', '11kg')
+
+`
+
+/**
+ * Function que aplica a criação da tabela Adestrador via SQLite
+ */
+function criaTabelaCachorro() {
+    Database.run(CACHORRO_TABLE, (error) => {
+        if (error) {
+            console.log("Erro ao criar tabela de cachorro")
+        } else {
+            console.log("Tabela Cachorro criada!")
+        }
+    });
+}
+
+/**
+ * Function que polula via SQLite a tabela ADESTRADOR
+ */
+function populaTabelaCachorro() {
+    Database.run(ADD_CACHORRO_DATA, (error) => {
+        if (error) {
+            console.log("Erro ao popular tabela cachorro")
+        }
+        else {
+            console.log("Tabela Cachorro populada!")
+        }
+    });
+}
+
+/**
+ * Script sql de criação da tabela Adestrador 
+ */
+const AGENDAMENTO_TABLE = `
+CREATE TABLE IF NOT EXISTS "Agendamento" (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    "DURACAO" varchar(64),
+    "DIA" varchar(64),
+    "HORA" varchar(64),
+    "ID_CACHORRO" INTEGER, 
+    "ID_ADESTRADOR" INTEGER 
+);
+`
+
+/**
+ * script de inserção de dados base
+ */
+const ADD_AGENDAMENTO_DATA = `
+INSERT INTO Agendamento (duracao, dia, hora, id_cachorro, id_adestrador)
+VALUES 
+    ('1h 30min','25.09', '15:00', 1, 1)
+
+`
+
+/**
+ * Function que aplica a criação da tabela Adestrador via SQLite
+ */
+function criaTabelaAgendamento() {
+    Database.run(AGENDAMENTO_TABLE, (error) => {
+        if (error) {
+            console.log("Erro ao criar tabela de agendamento")
+        } else {
+            console.log("Tabela Agendamento criada!")
+        }
+    });
+}
+
+/**
+ * Function que polula via SQLite a tabela ADESTRADOR
+ */
+function populaTabelaAgendamento() {
+    Database.run(ADD_AGENDAMENTO_DATA, (error) => {
+        if (error) {
+            console.log("Erro ao popular tabela de agendamento")
+        }
+        else {
+            console.log("Tabela Agendamento populada!")
         }
     });
 }
@@ -161,6 +261,12 @@ Database.serialize(()=>{
     
     criaTabelaEndereco();
     populaTabelaEndereco();
+
+    criaTabelaAgendamento();
+    populaTabelaAgendamento();
+
+    criaTabelaCachorro();
+    populaTabelaCachorro();
 });
 
 
