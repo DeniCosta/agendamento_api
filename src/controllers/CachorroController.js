@@ -1,4 +1,4 @@
-import CachorroModel from "../model/CachorroModel.js";
+import CachorroModel from "../models/CachorroModel.js";
 import CachorroDAO from "../DAO/CachorroDAO.js"
 // import DatabaseMetodos from "../utils/DatabaseMetodos.js";
 
@@ -54,9 +54,9 @@ class CachorroController {
       const id = req.params.id
       const body = req.body
       try {
-        ValidacaoServices.validaCamposCachorro(body.nome, body.raca, body.cor, body.sexo, body.porte, body.peso, body.temperamento, body.statusVacina, body.proprietario)
+        ValidacaoServices.validaCamposCachorro(body.nome, body.raca, body.cor, body.sexo, body.peso)
         await ValidacaoServices.validarExistencia(id)
-        const cachorroModelado = new CachorroModel(body.nome, body.raca, body.cor, body.sexo, body.porte, body.peso, body.temperamento, body.statusVacina, body.proprietario)
+        const cachorroModelado = new CachorroModel(body.nome, body.raca, body.cor, body.sexo, body.peso)
         CachorroDAO.AtualizarcachorroPorId(id, cachorroModelado)
         res.status(204).json()
       } catch (error) {
