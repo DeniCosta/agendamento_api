@@ -1,7 +1,7 @@
 import EnderecoModel from "../models/EnderecoModel.js";
 import DAO from "./DAO.js";
 
-
+const ENDERECO_TABELA = "Endereco"
 class EnderecoDAO extends DAO{
     /**
      * Método de inserção de dados da tabela Endereço
@@ -16,62 +16,46 @@ class EnderecoDAO extends DAO{
         return result
     }
 
+    
     /**
-     * Método que retorna todos os registros da tabela Endereço
-     * @returns {Array<UsuariosModel>}
+     * @returns {Array<EnderecoModel>}
      */
-    static async buscarTodosOsEnderecos(){
+    static async buscarTodosEmAdestrador(){
         const query = `
-        SELECT * FROM ENDERECO;
-        `
-        return await this.buscar(query)
+        SELECT * FROM ${ENDERECO_TABELA};
+        `;
+        return await this.buscar(query);
     }
 
     /**
-     * Método de busca de registros específicos na tabela Endereço através de um identificador
+     * Método de busca de registros específicos na tabela Usuários através de um identificador
      * @param {string} id 
-     * @returns {UsuariosModel}
+     * @returns {EnderecoModel}
      */
-    static async buscarEnderecoPorId(id){
+    static async buscarEnderecoPorId(id) {
         const query = `
-        SELECT * FROM ENDERECO where ID = ?;
-        `
-            try {
-                const response = await this.buscarPorId(query, id)
-                return response
-            } catch (error) {
-                throw error
-            }
-
+        SELECT * FROM ${ENDERECO_TABELA} where ID = ?;
+        `;
+        return await this.buscarPorId(query, id);
     }
 
     /**
-     * Método de deleção de registros específicos na tabela Usuários através de um identificador
+     * Método de deleção de registros específicos na tabela Adestrador através de um identificador
      * @param {string} id 
      */
-    static async deletarEnderecoPorId(id){
-        const query = "DELETE FROM ENDERECO WHERE ID = ?"
-        try {
-            await this.deletarPorId(query, id)
-        } catch (error) {
-            throw error
-        }
-
+    static async deletarEnderecoPorId(id) {
+        const query = `DELETE FROM ${ENDERECO_TABELA} WHERE ID = ?;`;
+        await this.deletarPorId(query, id);
     }
 
     /**
-     * Atualiza um registro específico da tabela Usuários através de um identificador
+     * Atualiza um registro específico da tabela Adestrador através de um identificador
      * @param {string} id 
      * @param {any} data 
      */
-    static async AtualizarEnderecoPorId(id, data){
-        const query = "UPDATE ENDERECO SET (CEP, NUMERO, COMPLEMENTO) = (?,?,?) WHERE ID = ?"
-        const values = Object.values(data)
-        try {            
-            await this.atualizarPorId(query, id, [id ,...values])
-        } catch (error) {
-            throw error
-        }
+    static async AtualizarEnderecoPorId(id, data) {
+        const query = `UPDATE ${ADESTRADOR_TABELA} SET CEP=?, NUMERO=?, COMPLEMENTO=? WHERE ID=?;`;
+        await this.atualizarPorId(query, [...Object.values(data), id]);
     }
 }
 
