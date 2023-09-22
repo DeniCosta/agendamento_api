@@ -53,12 +53,12 @@ function populaTabelaClientes() {
  * Script sql de criação da tabela Adestrador 
  */
 const ADESTRADOR_TABLE = `
-CREATE TABLE IF NOT EXISTS "adestrador" (
+CREATE TABLE IF NOT EXISTS adestrador (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    "nome" varchar(64) ,
-    "formacao" varchar(64),
-    "id_agendamento" INTEGER, 
-    "id_endereco" INTEGER 
+    nome TEXT,
+    formacao TEXT,
+    id_agendamento INTEGER, 
+    id_endereco INTEGER 
 );
 `
 
@@ -100,7 +100,7 @@ function populaTabelaAdestrador() {
 }
 
 /**
- * Script sql de criação da tabela Adestrador 
+ * Script sql de criação da tabela endereço 
  */
 const ENDERECO_TABLE = `
 CREATE TABLE IF NOT EXISTS "endereco" (
@@ -122,7 +122,7 @@ VALUES
 `
 
 /**
- * Function que aplica a criação da tabela Adestrador via SQLite
+ * Function que aplica a criação da tabela Endereço via SQLite
  */
 function criaTabelaEndereco() {
     Database.run(ENDERECO_TABLE, (error) => {
