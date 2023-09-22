@@ -8,7 +8,7 @@ class CachorroValidacao extends ValidacaoServices {
      * @returns {boolean}
      */
     static validaRaca(raca) {
-        return typeof raca === "string";
+        return typeof raca == "string";
     }
     /**
          * Método para validação da cor  entidade cachorro
@@ -16,7 +16,7 @@ class CachorroValidacao extends ValidacaoServices {
          * @returns {boolean}
          */
     static validaCor(cor) {
-        return typeof cor === "string";
+        return typeof cor == "string";
     }
 
     /**
@@ -25,7 +25,7 @@ class CachorroValidacao extends ValidacaoServices {
          * @returns {boolean}
          */
     static validaSexo(sexo) {
-        return typeof sexo === "string";
+        return typeof sexo == "string";
     }
 
     /**
@@ -34,7 +34,7 @@ class CachorroValidacao extends ValidacaoServices {
            * @returns {boolean}
            */
     static validaPeso(peso) {
-        return typeof peso === "string" && peso.length >= 4;
+        return typeof peso == "string";
     }
 
     /**
@@ -48,7 +48,7 @@ class CachorroValidacao extends ValidacaoServices {
          * 
          */
 
-    static validaCamposAdestrador(nome, raca, cor, sexo, peso) {
+    static validaCamposCachorro(nome, raca, cor, sexo, peso) {
         const isValid = this.validaNome(nome) && this.validaRaca(raca) && this.validaCor(cor) && this.validaSexo(sexo) && this.validaPeso(peso)
         if (!isValid) {
             throw new Error("Campos invalidos")
