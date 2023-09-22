@@ -50,12 +50,12 @@ class ClientesController {
             const body = req.body;
 
             // Verifique se todos os campos obrigatórios estão presentes na requisição
-            if (!body.NOME || !body.EMAIL || !body.TELEFONE || body.ID_ENDERECO === undefined) {
+            if (!body.nome || !body.email || !body.telefone || body.id_endereco === undefined) {
                 res.status(400).json({ error: true, message: "Campos obrigatórios não preenchidos" });
                 return; // Encerre a função aqui para evitar a execução do código abaixo
             }
 
-            const clienteModelado = new ClienteModel(body.NOME, body.EMAIL, body.TELEFONE, body.ID_ENDERECO);
+            const clienteModelado = new ClienteModel(body.nome, body.email, body.telefone, body.id_endereco);
             try {
                 await ClienteDAO.inserirCliente(clienteModelado);
                 res.status(201).json({
@@ -74,9 +74,9 @@ class ClientesController {
             const id = req.params.id
             const body = req.body
             try {
-                ValidacaoServices.validaCamposCliente(body.NOME, body.EMAIL, body.TELEFONE, body.ID_ENDERECO)
+                ValidacaoServices.validaCamposCliente(body.nome, body.email, body.telefone, body.id_endereco)
                 await ValidacaoServices.validarExistencia(id)
-                const clienteModelado = new ClienteModel(body.NOME, body.EMAIL, body.TELEFONE, body.ID_ENDERECO)
+                const clienteModelado = new ClienteModel(body.nome, body.email, body.telefone, body.id_endereco)
                 await ClienteDAO.AtualizarClientePorId(id, clienteModelado)
                 res.status(204).json()
             } catch (error) {

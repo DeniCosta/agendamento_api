@@ -1,7 +1,7 @@
 import ClienteModel from "../models/ClienteModel.js";
 import DAO from "./DAO.js";
 
-const CLIENTE_TABELA = "CLIENTES";
+const CLIENTE_TABELA = "clientes";
 
 class ClienteDAO extends DAO {
     /**
@@ -11,7 +11,7 @@ class ClienteDAO extends DAO {
     static async inserirCliente(data) {
         const dataValues = Object.values(data);
         const query = `
-        INSERT INTO ${CLIENTE_TABELA} (NOME, EMAIL, TELEFONE, ID_ENDERECO) VALUES (?,?,?,?);
+        INSERT INTO ${CLIENTE_TABELA} (nome, email, telefone, id_endereco) VALUES (?,?,?,?);
         `;
         const result = await this.inserir(query, dataValues);
         return result;
@@ -35,7 +35,7 @@ class ClienteDAO extends DAO {
      */
     static async buscarClientePorId(id) {
         const query = `
-        SELECT * FROM ${CLIENTE_TABELA} where ID = ?;
+        SELECT * FROM ${CLIENTE_TABELA} where id = ?;
         `;
         return await this.buscarPorId(query, id);
     }
@@ -45,7 +45,7 @@ class ClienteDAO extends DAO {
      * @param {integer} id 
      */
     static async deletarClientePorId(id) {
-        const query = `DELETE FROM ${CLIENTE_TABELA} WHERE ID = ?;`;
+        const query = `DELETE FROM ${CLIENTE_TABELA} WHERE id = ?;`;
         await this.deletarPorId(query, id);
     }
 
@@ -55,7 +55,7 @@ class ClienteDAO extends DAO {
  * @param {any} data 
  */
 static async AtualizarClientePorId(id, data) {
-    const query = `UPDATE ${CLIENTE_TABELA} SET NOME=?, EMAIL=?, TELEFONE=?, ID_ENDERECO=? WHERE ID=?;`;
+    const query = `UPDATE ${CLIENTE_TABELA} SET nome=?, email=?, telefone=?, id_endereco=? WHERE id=?;`;
     await this.atualizarPorId(query, [...Object.values(data), id]);
 }
 }
