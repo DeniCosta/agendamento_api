@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS adestrador (
 `
 
 /**
- * script de inserção de dados base
+ * script de inserção de dados adestrador
  */
 const ADD_ADESTRADOR_DATA = `
 INSERT INTO adestrador (nome,formacao,id_agendamento,id_endereco)
@@ -86,7 +86,7 @@ function criaTabelaAdestrador() {
 }
 
 /**
- * Function que polula via SQLite a tabela ADESTRADOR
+ * Function que polula via SQLite a tabela adestrador
  */
 function populaTabelaAdestrador() {
     Database.run(ADD_ADESTRADOR_DATA, (error) => {
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS "endereco" (
 `
 
 /**
- * script de inserção de dados base
+ * script de inserção de dados endereço
  */
 const ADD_ENDERECO_DATA = `
 INSERT INTO endereco (cep, numero, complemento)
@@ -135,7 +135,7 @@ function criaTabelaEndereco() {
 }
 
 /**
- * Function que polula via SQLite a tabela ADESTRADOR
+ * Function que polula via SQLite a tabela endereço
  */
 function populaTabelaEndereco() {
     Database.run(ADD_ENDERECO_DATA, (error) => {
@@ -149,21 +149,21 @@ function populaTabelaEndereco() {
 }
 
 /**
- * Script sql de criação da tabela Adestrador 
+ * Script sql de criação da tabela Cachorro
  */
 const CACHORRO_TABLE = `
-CREATE TABLE IF NOT EXISTS "cachorro" (
+CREATE TABLE IF NOT EXISTS cachorro (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    "nome" varchar(64),
-    "raca" varchar(64),
-    "cor" varchar(64),
-    "sexo" varchar(64),
-    "peso" varchar(64)
+    nome TEXT,
+    raca TEXT,
+    cor TEXT,
+    sexo TEXT,
+    peso TEXT
 );
 `
 
 /**
- * script de inserção de dados base
+ * script de inserção de dados cachorro
  */
 const ADD_CACHORRO_DATA = `
 INSERT INTO cachorro (nome, raca, cor, sexo, peso)
@@ -200,7 +200,7 @@ function populaTabelaCachorro() {
 }
 
 /**
- * Script sql de criação da tabela Adestrador 
+ * Script sql de criação da tabela Agendamento 
  */
 const AGENDAMENTO_TABLE = `
 CREATE TABLE IF NOT EXISTS "agendamento" (
@@ -214,7 +214,7 @@ CREATE TABLE IF NOT EXISTS "agendamento" (
 `
 
 /**
- * script de inserção de dados base
+ * script de inserção de dados Agendamento
  */
 const ADD_AGENDAMENTO_DATA = `
 INSERT INTO agendamento (duracao, dia, hora, id_cachorro, id_adestrador)
@@ -224,7 +224,7 @@ VALUES
 `
 
 /**
- * Function que aplica a criação da tabela Adestrador via SQLite
+ * Function que aplica a criação da tabela Agendamento via SQLite
  */
 function criaTabelaAgendamento() {
     Database.run(AGENDAMENTO_TABLE, (error) => {
@@ -237,7 +237,7 @@ function criaTabelaAgendamento() {
 }
 
 /**
- * Function que polula via SQLite a tabela ADESTRADOR
+ * Function que polula via SQLite a tabela Agendamento
  */
 function populaTabelaAgendamento() {
     Database.run(ADD_AGENDAMENTO_DATA, (error) => {
