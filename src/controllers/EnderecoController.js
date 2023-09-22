@@ -1,5 +1,5 @@
 import EnderecoModel from "../models/EnderecoModel.js"
-import ValidacaoServices from "../services/ValidacaoServices.js"
+import ValidacaoServices from "../services/EnderecoValidacao.js"
 import EnderecoDAO from "../DAO/EnderecoDAO.js"
 
 class EnderecoController {
@@ -64,7 +64,7 @@ class EnderecoController {
         /**
          * Rota para atualizar um registro já existente na tabela endereços
          */
-        app.put("/usuarios/:id", async (req, res) => {
+        app.put("/endereco/:id", async (req, res) => {
             const id = req.params.id
             const body = req.body
             try {
