@@ -20,7 +20,7 @@ class CachorroDAO extends DAO {
     /**
      * @returns {Array<CachorroModel>}
      */
-    static async buscarTodosEmCachorro(){
+    static async buscarTodosOsCachorros(){
       const query = `
       SELECT * FROM ${CACHORRO_TABELA};
       `;

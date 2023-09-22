@@ -20,7 +20,7 @@ class EnderecoDAO extends DAO{
     /**
      * @returns {Array<EnderecoModel>}
      */
-    static async buscarTodosEmAdestrador(){
+    static async buscarTodosOsEnderecos(){
         const query = `
         SELECT * FROM ${ENDERECO_TABELA};
         `;
@@ -54,7 +54,7 @@ class EnderecoDAO extends DAO{
      * @param {any} data 
      */
     static async AtualizarEnderecoPorId(id, data) {
-        const query = `UPDATE ${ADESTRADOR_TABELA} SET CEP=?, NUMERO=?, COMPLEMENTO=? WHERE ID=?;`;
+        const query = `UPDATE ${ENDERECO_TABELA} SET CEP=?, NUMERO=?, COMPLEMENTO=? WHERE ID=?;`;
         await this.atualizarPorId(query, [...Object.values(data), id]);
     }
 }
