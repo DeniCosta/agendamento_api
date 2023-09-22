@@ -1,5 +1,5 @@
 import ClienteModel from "../models/ClienteModel.js";
-import ValidacaoServices from "../services/ValidacaoServices.js";
+import ValidacaoServices from "../services/ClienteValidacao.js";
 import ClienteDAO from "../DAO/ClienteDAO.js";
 
 class ClientesController {
@@ -80,15 +80,15 @@ class ClientesController {
                 await ClienteDAO.AtualizarClientePorId(id, clienteModelado)
                 res.status(204).json()
             } catch (error) {
-                if(error.message == "Campos invalidos"){
-                    res.status(400).json({error: error.message})
+                if (error.message == "Campos invalidos") {
+                    res.status(400).json({ error: error.message })
                 } else {
-                    res.status(404).json({id: id, ...error})
+                    res.status(404).json({ id: id, ...error })
                 }
             }
         })
     }
-       
+
 }
 
 export default ClientesController;
