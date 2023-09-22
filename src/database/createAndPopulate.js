@@ -3,12 +3,12 @@ import Database from "./Database.js";
  * Script SQL de criação da tabela CLIENTES
  */
 const CLIENTES_TABLE = `
-CREATE TABLE IF NOT EXISTS CLIENTES (
-    ID INTEGER PRIMARY KEY AUTOINCREMENT,
-    NOME TEXT,
-    EMAIL TEXT,
-    TELEFONE TEXT,
-    ID_ENDERECO INTEGER
+CREATE TABLE IF NOT EXISTS clientes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT,
+    email TEXT,
+    telefone TEXT,
+    id_endereco INTEGER
 );
 `
 
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS CLIENTES (
  * Script de inserção de dados base para CLIENTES
  */
 const ADD_CLIENTES_DATA = `
-INSERT INTO CLIENTES (NOME, EMAIL, TELEFONE, ID_ENDERECO)
+INSERT INTO clientes (nome, email, telefone, id_endereco)
 VALUES 
     ('Julia Costa', 'julia.costa@gmail.com.br', '41999999999', 1),
     ('Maria de Jesus', 'maje@gmail.com', '41888888888', 2),
@@ -53,12 +53,12 @@ function populaTabelaClientes() {
  * Script sql de criação da tabela Adestrador 
  */
 const ADESTRADOR_TABLE = `
-CREATE TABLE IF NOT EXISTS "Adestrador" (
-    ID INTEGER PRIMARY KEY AUTOINCREMENT,
-    "NOME" varchar(64) ,
-    "FORMACAO" varchar(64),
-    "ID_AGENDAMENTO" INTEGER, 
-    "ID_Endereco" INTEGER 
+CREATE TABLE IF NOT EXISTS "adestrador" (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    "nome" varchar(64) ,
+    "formacao" varchar(64),
+    "id_agendamento" INTEGER, 
+    "id_endereco" INTEGER 
 );
 `
 
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS "Adestrador" (
  * script de inserção de dados base
  */
 const ADD_ADESTRADOR_DATA = `
-INSERT INTO Adestrador (nome,formacao,id_agendamento,id_endereco)
+INSERT INTO adestrador (nome,formacao,id_agendamento,id_endereco)
 VALUES 
     ('DA Cruz','Auxiliar de veterinário',1,1)
 
@@ -103,11 +103,11 @@ function populaTabelaAdestrador() {
  * Script sql de criação da tabela Adestrador 
  */
 const ENDERECO_TABLE = `
-CREATE TABLE IF NOT EXISTS "Endereco" (
-    ID INTEGER PRIMARY KEY AUTOINCREMENT,
-    "CEP" varchar(64) ,
-    "NUMERO" varchar(64),
-    "COMPLEMENTO" varchar(64)
+CREATE TABLE IF NOT EXISTS "endereco" (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    "cep" varchar(64) ,
+    "numero" varchar(64),
+    "complemento" varchar(64)
 );
 `
 
@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS "Endereco" (
  * script de inserção de dados base
  */
 const ADD_ENDERECO_DATA = `
-INSERT INTO Endereco (CEP, numero, complemento)
+INSERT INTO endereco (cep, numero, complemento)
 VALUES 
     ('83232331','19410','Casa 3')
 
@@ -152,8 +152,8 @@ function populaTabelaEndereco() {
  * Script sql de criação da tabela Adestrador 
  */
 const CACHORRO_TABLE = `
-CREATE TABLE IF NOT EXISTS "Cachorro" (
-    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+CREATE TABLE IF NOT EXISTS "cachorro" (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     "nome" varchar(64),
     "raca" varchar(64),
     "cor" varchar(64),
@@ -166,7 +166,7 @@ CREATE TABLE IF NOT EXISTS "Cachorro" (
  * script de inserção de dados base
  */
 const ADD_CACHORRO_DATA = `
-INSERT INTO Cachorro (nome, raca, cor, sexo, peso)
+INSERT INTO cachorro (nome, raca, cor, sexo, peso)
 VALUES 
     ('toto','salsicha','preto', 'macho', '11kg')
 
@@ -203,13 +203,13 @@ function populaTabelaCachorro() {
  * Script sql de criação da tabela Adestrador 
  */
 const AGENDAMENTO_TABLE = `
-CREATE TABLE IF NOT EXISTS "Agendamento" (
-    ID INTEGER PRIMARY KEY AUTOINCREMENT,
-    "DURACAO" varchar(64),
-    "DIA" varchar(64),
-    "HORA" varchar(64),
-    "ID_CACHORRO" INTEGER, 
-    "ID_ADESTRADOR" INTEGER 
+CREATE TABLE IF NOT EXISTS "agendamento" (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    "duracao" varchar(64),
+    "dia" varchar(64),
+    "hora" varchar(64),
+    "id_cachorro" INTEGER, 
+    "id_adestrador" INTEGER 
 );
 `
 
@@ -217,7 +217,7 @@ CREATE TABLE IF NOT EXISTS "Agendamento" (
  * script de inserção de dados base
  */
 const ADD_AGENDAMENTO_DATA = `
-INSERT INTO Agendamento (duracao, dia, hora, id_cachorro, id_adestrador)
+INSERT INTO agendamento (duracao, dia, hora, id_cachorro, id_adestrador)
 VALUES 
     ('1h 30min','25.09', '15:00', 1, 1)
 
