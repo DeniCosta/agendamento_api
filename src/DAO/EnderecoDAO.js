@@ -1,26 +1,26 @@
 import EnderecoModel from "../models/EnderecoModel.js";
 import DAO from "./DAO.js";
 
-const ENDERECO_TABELA = "Endereco"
-class EnderecoDAO extends DAO{
+const ENDERECO_TABELA = "endereco";
+
+class EnderecoDAO extends DAO {
     /**
      * Método de inserção de dados da tabela Endereço
      * @param {EnderecoModel} data 
      */
-    static async inserirEndereco(data){
+    static async inserirEndereco(data) {
         const dataValues = Object.values(data)
         const query = `
-        INSERT INTO ENDERECO (CEP, NUMERO, COMPLEMENTO) VALUES (?,?,?)
+        INSERT INTO ${ENDERECO_TABELA} (cep, numero, complemento) VALUES (?,?,?)
         `
         const result = await this.inserir(query, dataValues)
         return result
     }
 
-    
     /**
      * @returns {Array<EnderecoModel>}
      */
-    static async buscarTodosOsEnderecos(){
+    static async buscarTodosOsEnderecos() {
         const query = `
         SELECT * FROM ${ENDERECO_TABELA};
         `;
