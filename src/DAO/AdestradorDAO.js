@@ -1,7 +1,7 @@
 import AdestradorModel from "../models/AdestradorModel.js";
 import DAO from "./DAO.js";
 
-const ADESTRADOR_TABELA = "Adestrador"
+const ADESTRADOR_TABELA = "adestrador"
 
 class AdestradorDAO extends DAO{
     /**
@@ -10,10 +10,10 @@ class AdestradorDAO extends DAO{
     static async inserirAdestrador(data){
         const dataValues = Object.values(data)
         const query = `
-        INSERT INTO Adestrador (nome,formacao,id_agendamento,id_endereco) VALUES (?,?,?,?)
+        INSERT INTO ${ADESTRADOR_TABELA} (nome,formacao,id_agendamento,id_endereco) VALUES (?,?,?,?)
         `
         const result = await this.inserir(query, dataValues)
-        return result
+        return result;
     }
 
     /**
@@ -33,7 +33,7 @@ class AdestradorDAO extends DAO{
      */
     static async buscarAdestradorPorId(id) {
         const query = `
-        SELECT * FROM ${ADESTRADOR_TABELA} where ID = ?;
+        SELECT * FROM ${ADESTRADOR_TABELA} where id = ?;
         `;
         return await this.buscarPorId(query, id);
     }
@@ -43,17 +43,17 @@ class AdestradorDAO extends DAO{
      * @param {string} id 
      */
     static async deletarAdestradorPorId(id) {
-        const query = `DELETE FROM ${ADESTRADOR_TABELA} WHERE ID = ?;`;
+        const query = `DELETE FROM ${ADESTRADOR_TABELA} WHERE id = ?;`;
         await this.deletarPorId(query, id);
     }
 
     /**
      * Atualiza um registro específico da tabela Adestrador através de um identificador
-     * @param {string} id 
+     * @param {integer} id 
      * @param {any} data 
      */
     static async AtualizarAdestradorPorId(id, data) {
-        const query = `UPDATE ${ADESTRADOR_TABELA} SET NOME=?, FORMACAO=?, TELEFONE=?, ID_AGENDAMENTO=?,  ID_ENDERECO=? WHERE ID=?;`;
+        const query = `UPDATE ${ADESTRADOR_TABELA} SET nome=?, formacao=?, id_agendamento=? , id_endereco=? WHERE id=?;`;
         await this.atualizarPorId(query, [...Object.values(data), id]);
     }
 }

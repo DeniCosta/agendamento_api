@@ -1,88 +1,98 @@
 import AdestradorDAO from "../DAO/AdestradorDAO.js"
 import AdestradorModel from "../models/AdestradorModel.js"
-import ValidacaoServices from "../services/ValidacaoServices.js"
+import ValidacaoServices from "../services/AdestradorValidacao.js"
 
 
-class AdestradorController{
+class AdestradorController {
     /**
      * Método para centralização de rotas no controller
      * @param {Express} app 
      */
-    static rotas(app){
+    static rotas(app) {
         /**
          * Rota para buscar todos os Adestradores
          */
-        app.get("/adestrador", async (req, res)=>{
+        app.get("/adestrador", async (req, res) => {
             const adestrador = await AdestradorDAO.buscarTodosEmAdestrador()
             res.status(200).json(adestrador)
         })
-        
+
         /**
          * Rota para buscar adestradores pelo id
          */
-        app.get("/adestrador/:id", (req, res)=>{
-            const id = req.params.id
-            const isValid = ValidacaoServices.validarExistencia(id)
-            if(isValid){
-                const resposta = AdestradorDAO.buscarAdestradorPorId(id)
-                res.status(200).json(resposta)
+        app.get("/adestrador/:id", async (req, res) => {
+            const id = req.params.id;
+            try {
+                const adestrador = await AdestradorDAO.buscarAdestradorPorId(id);
+                if (adestrador) {
+                    res.status(200).json(adestrador);
+                } else {
+                    res.status(404).json({ error: true, message: `Adestrador não encontrado para o id ${id}` });
+                }
+            } catch (error) {
+                res.status(500).json({ error: true, message: "Erro ao buscar adestrador" });
             }
-            res.status(404).json({error: true, message: `Adestrador não encontrado para o id ${id}`})
         })
 
         /**
          * Rota para deletar adestrador
          */
-        app.delete("/adestrador/:id", (req, res)=>{
+        app.delete("/adestrador/:id", async (req, res) => {
             const id = req.params.id
-            const isValid = ValidacaoServices.validarExistencia(id)
-            if(isValid){
-                AdestradorDAO.deletarAdestradorPorId(id)
-                res.status(200).json({error: false})
-            }
-            res.status(404).json({error: true, message: `Adestrador não encontrado para o id ${id}`})
-        })
-
-        /**
-         * Rota para inserir um novo adestrador
-         */
-        app.post("/adestrador", async (req, res)=>{
-            const body = Object.values(req.body)
-            const isValid = ValidacaoServices.validaCamposAdestrador(...body)
-            if(isValid){
-                const adestradorModel = new AdestradorModel(...body)
-                try {
-                    await AdestradorDAO.inserirAdestrador(adestradorModel)
-                    res.status(201).json({
-                        error: false,
-                        message: "Adestrador feito com sucesso"
-                    })
-                    console.log("tudo pronto")
-                } catch (error) {
-                    res.status(503).json({error: true, message: `Servidor indisponível no momento`})
+            try {
+                const adestrador = await AdestradorDAO.buscarAdestradorPorId(id);
+                if (adestrador) {
+                    await AdestradorDAO.deletarAdestradorPorId(id);
+                    res.status(200).json({ error: false });
+                } else {
+                    res.status(404).json({ error: true, message: `Adestrador não encontrado para o id ${id}` });
                 }
-            } else {
-                res.status(400).json({error: true, message: `Campos invalidos`})
+            } catch (error) {
+                res.status(500).json({ error: true, message: "Erro ao deletar adestrador" });
             }
         })
 
+        // Rota para inserir um novo adestrador
+        app.post("/adestrador", async (req, res) => {
+            const body = req.body;
+
+            // Verifique se todos os campos obrigatórios estão presentes na requisição
+            if (!body.nome || !body.formacao || body.id_agendamento === undefined || body.id_endereco === undefined) {
+                res.status(400).json({ error: true, message: "Campos obrigatórios não preenchidos" });
+                return; // Encerre a função aqui para evitar a execução do código abaixo
+            }
+
+            const adestradorModelado = new AdestradorModel(body.nome, body.formacao, body.id_agendamento, body.id_endereco);
+            try {
+                await AdestradorDAO.inserirAdestrador(adestradorModelado);
+                res.status(201).json({
+                    error: false,
+                    message: "Cliente criado com sucesso"
+                });
+            } catch (error) {
+                res.status(503).json({ error: true, message: "Servidor indisponível no momento" });
+            }
+        });
+
         /**
-         * Rota para atualizar um registro já existente na tabela adestrador
+         * Rota para atualizar um registro de um adestrador
          */
-        app.put("/adestrador/:id", (req, res)=>{
+        app.put("/adestrador/:id", async (req, res) => {
             const id = req.params.id
             const body = req.body
-            const exists = ValidacaoServices.validarExistencia(id)
-            const isValid = ValidacaoServices.validaCamposAdestrador(body.nome, body.formacao,body.id_endereco,body.id_agendamento)
-            if(exists){
-                if(isValid){
-                    const adestradorModelo = new AdestradorModel(body.nome,body.formacao,body.id_endereco,body.id_agendamento)
-                    AdestradorDAO.AtualizarAdestradorPorId(id, adestradorModelo)
-                    res.status(204).json()
+            try {
+                ValidacaoServices.validaCamposAdestrador(body.nome, body.formacao, body.id_agendamento, body.id_endereco)
+                await ValidacaoServices.validarExistencia(id)
+                const adestradorModelado = new AdestradorModel(body.nome, body.formacao, body.id_agendamento, body.id_endereco)
+                await AdestradorDAO.AtualizarAdestradorPorId(id, adestradorModelado)
+                res.status(204).json()
+            } catch (error) {
+                if (error.message == "Campos invalidos") {
+                    res.status(400).json({ error: error.message })
+                } else {
+                    res.status(404).json({ id: id, ...error })
                 }
-                res.status(400).json({error: true, message: `Campos invalidos`})
             }
-            res.status(404).json({error: true, message: `Adestrador não encontrado para o id ${id}`})
         })
     }
 }
