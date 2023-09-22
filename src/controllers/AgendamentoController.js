@@ -12,8 +12,8 @@ class AgendamentoController {
         /**
          * Rota para buscar todos 
          */
-        app.get("/agendamento", async (_, res) => {
-            const agendamento = await AgendamentoDAO.buscarTodosemAgendamento()
+        app.get("/agendamento", async (req, res) => {
+            const agendamento = await AgendamentoDAO.buscarTodosEmAgendamento()
             res.status(200).json(agendamento)
         })
 

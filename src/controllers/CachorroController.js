@@ -10,7 +10,7 @@ class CachorroController {
   static rotas(app) {
 
     app.get("/cachorro", async (req, res) => {
-      const cachorro = await CachorroDAO.buscarTodosOscachorros()
+      const cachorro = await CachorroDAO.buscarTodosOsCachorros()
       res.status(200).json(cachorro)
     })
 
