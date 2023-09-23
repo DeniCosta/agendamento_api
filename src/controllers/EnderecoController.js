@@ -22,10 +22,14 @@ class EnderecoController {
         app.get("/endereco/:id", async (req, res) => {
             const id = req.params.id
             try {
-                const resposta = await EnderecoDAO.buscarEnderecoPorId(id)
-                res.status(200).json(resposta)
+                const endereco = await EnderecoDAO.buscarEnderecoPorId(id);
+                if (endereco) {
+                    res.status(200).json(endereco);
+                } else {
+                    res.status(404).json({ error: true, message: `Endereço não encontrado para o id ${id}` });
+                }
             } catch (error) {
-                res.status(404).json({id: id, ...error})
+                res.status(500).json({ error: true, message: "Erro ao buscar endereço" });
             }
         })
 
@@ -35,11 +39,15 @@ class EnderecoController {
         app.delete("/endereco/:id", async (req, res) => {
             const id = req.params.id
             try {
-                await ValidacaoServices.validarExistencia(id)
-                EnderecoDAO.deletarEnderecoPorId(id)
-                res.status(200).json({ error: false })
+                const endereco = await EnderecoDAO.buscarEnderecoPorId(id);
+                if (endereco) {
+                    await EnderecoDAO.deletarEnderecoPorId(id);
+                    res.status(200).json({ error: false });
+                } else {
+                    res.status(404).json({ error: true, message: `Endereço não encontrado para o id ${id}` });
+                }
             } catch (error) {
-                res.status(404).json({ id: id, ...error })
+                res.status(500).json({ error: true, message: "Erro ao deletar endereço" });
             }
         })
 
@@ -57,7 +65,7 @@ class EnderecoController {
                     message: "Endereço adicioando com sucesso"
                 })
             } catch (error) {
-                res.status(400).json({error: error.message})
+                res.status(400).json({ error: error.message })
             }
         })
 
@@ -74,10 +82,10 @@ class EnderecoController {
                 EnderecoDAO.AtualizarEnderecoPorId(id, enderecoModelado)
                 res.status(204).json()
             } catch (error) {
-                if(error.message == "Campos invalidos"){
-                    res.status(400).json({error: error.message})
+                if (error.message == "Campos invalidos") {
+                    res.status(400).json({ error: error.message })
                 } else {
-                    res.status(404).json({id: id, ...error})
+                    res.status(404).json({ id: id, ...error })
                 }
             }
         })

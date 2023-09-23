@@ -34,7 +34,7 @@ class EnderecoDAO extends DAO {
      */
     static async buscarEnderecoPorId(id) {
         const query = `
-        SELECT * FROM ${ENDERECO_TABELA} where ID = ?;
+        SELECT * FROM ${ENDERECO_TABELA} where id=?;
         `;
         return await this.buscarPorId(query, id);
     }
@@ -44,7 +44,7 @@ class EnderecoDAO extends DAO {
      * @param {string} id 
      */
     static async deletarEnderecoPorId(id) {
-        const query = `DELETE FROM ${ENDERECO_TABELA} WHERE ID = ?;`;
+        const query = `DELETE FROM ${ENDERECO_TABELA} WHERE id=?;`;
         await this.deletarPorId(query, id);
     }
 
@@ -54,7 +54,7 @@ class EnderecoDAO extends DAO {
      * @param {any} data 
      */
     static async AtualizarEnderecoPorId(id, data) {
-        const query = `UPDATE ${ENDERECO_TABELA} SET CEP=?, NUMERO=?, COMPLEMENTO=? WHERE ID=?;`;
+        const query = `UPDATE ${ENDERECO_TABELA} SET cep=?, numero=?, complemento=? WHERE id=?;`;
         await this.atualizarPorId(query, [...Object.values(data), id]);
     }
 }
