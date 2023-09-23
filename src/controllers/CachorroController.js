@@ -34,7 +34,7 @@ class CachorroController {
             const id = req.params.id;
             try {
                 const cachorro = await CachorroDAO.buscarCachorroPorId(id);
-                if (cliente) {
+                if (cachorro) {
                     await CachorroDAO.deletarCachorroPorId(id);
                     res.status(200).json({ error: false });
                 } else {
