@@ -219,7 +219,7 @@ CREATE TABLE IF NOT EXISTS "agendamento" (
 const ADD_AGENDAMENTO_DATA = `
 INSERT INTO agendamento (duracao, dia, hora, id_cachorro, id_adestrador)
 VALUES 
-    ('1h 30min','25.09', '15:00', 1, 1)
+    ('01:30','25-09', '15:00', 1, 1)
 
 `
 
