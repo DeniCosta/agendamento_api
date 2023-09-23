@@ -1,16 +1,17 @@
 import CachorroModel from "../models/CachorroModel.js";
 import DAO from "./DAO.js";
 
-const CACHORRO_TABELA = "Cachorro"
+const CACHORRO_TABELA = "cachorro"
 
 class CachorroDAO extends DAO {
   /**
    * @param {CachorroModel} data 
+   * @returns {boolean}
    */
   static async inserirCachorro(data) {
     const dataValues = Object.values(data)
     const query = `
-        INSERT INTO Cachorro (nome, raca, cor, sexo, peso) VALUES (?, ?, ?, ?, ?))
+        INSERT INTO ${CACHORRO_TABELA} (nome, raca, cor, sexo, peso) VALUES (?, ?, ?, ?, ?);
         `
     const result = await this.inserir(query, dataValues)
     return result
@@ -28,33 +29,33 @@ class CachorroDAO extends DAO {
   }
 
   /**
-   * Método de busca de registros específicos na tabela Usuários através de um identificador
+   * Método de busca de registros específicos na tabela Cahorro através de um identificador
    * @param {string} id 
    * @returns {CachorroModel}
    */
   static async buscarCachorroPorId(id) {
       const query = `
-      SELECT * FROM ${CACHORRO_TABELA} where ID = ?;
+      SELECT * FROM ${CACHORRO_TABELA} WHERE id=?;
       `;
       return await this.buscarPorId(query, id);
   }
 
   /**
-   * Método de deleção de registros específicos na tabela Adestrador através de um identificador
+   * Método de deleção de registros específicos na tabela Cachorro através de um identificador
    * @param {string} id 
    */
   static async deletarCachorroPorId(id) {
-      const query = `DELETE FROM ${CACHORRO_TABELA} WHERE ID = ?;`;
+      const query = `DELETE FROM ${CACHORRO_TABELA} WHERE id=?;`;
       await this.deletarPorId(query, id);
   }
 
   /**
-   * Atualiza um registro específico da tabela Adestrador através de um identificador
+   * Atualiza um registro específico da tabela Cachorro através de um identificador
    * @param {string} id 
    * @param {any} data 
    */
   static async AtualizarCachorroPorId(id, data) {
-      const query = `UPDATE ${CACHORRO_TABELA} SET NOME=?, RACA=?, COR=?, SEXO=?,  PESO=? WHERE ID=?;`;
+      const query = `UPDATE ${CACHORRO_TABELA} SET nome=?, raca=?, cor=?, sexo=?, peso=? WHERE id=?;`;
       await this.atualizarPorId(query, [...Object.values(data), id]);
   }
 }
