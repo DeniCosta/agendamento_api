@@ -1,5 +1,5 @@
 import AgendamentoModel from "../models/AgendamentoModel.js"
-import ValidacaoServices from "../services/ValidacaoServices.js"
+import ValidacaoServices from "../services/AgendamentoValidacao.js"
 import AgendamentoDAO from "../DAO/AgendamentoDAO.js"
 
 
