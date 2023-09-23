@@ -9,6 +9,7 @@ class CachorroModel {
    */
 
   constructor(nome, raca, cor, sexo, peso) {
+
     this.nome = nome
     this.raca = raca
     this.cor = cor
