@@ -68,10 +68,108 @@ Agora você já pode consumir as rotas do projeto.
 
 ## Rotas
 
-Aqui vai uma pequena demonstração de algumas das rotas disponiveis:
+Aqui vai uma pequena demonstração de uma das rotas disponiveis:
+<!-- nome, email, telefone, id_endereco -->
+#### POST - Rota: '/cliente' 
+ *A rota post cria cliente*
+
+###### Entrada
+```bash
+{
+  "NOME": "Leozin Flaflu",
+  "EMAIL": "fla-flu@gmail.com",
+  "TELEFONE": "40028922",
+  "ID_ENDERECO": 4
+}
+
+```      
+###### Saída
+```bash
+{
+  "error": false
+	"message": "Cliente criado com sucesso!"
+}
+```
+
+#### GET - Rota: '/cliente' 
+ *Retorna todos os clientes*
+
+###### Saída
+```bash
+[
+  {
+    "ID": 1,
+    "NOME": "Julia Costa",
+    "EMAIL": "julia.costa@gmail.com",
+    "TELEFONE": "41999999999",
+    "ID_ENDERECO": 1
+  },
+   {
+    "ID": 2,
+    "NOME": "Maria de Jesus",
+    "EMAIL": "mary.jesus@gmail.com",
+    "TELEFONE": "41988888888",
+    "ID_ENDERECO": 2
+  },
+   {
+    "ID": 3,
+    "NOME": "Camila Santos",
+    "EMAIL": "milinha12@gmail.com",
+    "TELEFONE": "41977777777",
+    "ID_ENDERECO": 3
+  }
+]
+```
+
+#### GET - Rota: '/cliente/2' 
+ *Retorna apenas um cliente buscando por id*
+
+###### Saída
+```bash
+{
+  "ID": 2,
+  "NOME": "Maria de Jesus",
+  "EMAIL": "mary.jesus@gmail.com",
+  "TELEFONE": "41988888888",
+  "ID_ENDERECO": 2
+},
+```
+
+#### PUT - Rota: '/cliente/1' 
+ *Update de cliente por id*
+
+###### Entrada
+```bash
+{
+  "ID": 1,
+  "NOME": "Julia Costa dos Santos",
+  "EMAIL": "julia.costa@gmail.com",
+  "TELEFONE": "41998989898",
+  "ID_ENDERECO": 1
+},
+
+```      
+###### Saída
+```bash
+{
+  "error": false
+	"message": "Cliente criado com sucesso!"
+}
+```
+
+#### DELETE - Rota: '/cliente/1' 
+ *Deletar cliente por id*
+
+###### Saída
+```bash
+{
+  "error": false
+}
+```
+
 ## Stack utilizada
 
-**Back-end:** JavaScript, Node, npm, SQLite3, Insomnia, cors, express, jest; 
+**Back-end:** JavaScript, Node, NPM, SQLite3, Insomnia, Cors, Express, jest; 
 
 **Documentação:** Lucid, Trello, Discord.
 
@@ -81,17 +179,13 @@ Aqui vai uma pequena demonstração de algumas das rotas disponiveis:
 Desenvolvimento do zero de uma API Rest, manipulação do runtime Node (que funciona como um interpretador de JavaScript fora do ambiente do navegador), utilização de gerenciadores de pacotes no node e das seguintes dependencias: cors, express, jest, sqlite3, nodemon, assim como a manipulação de banco de dados no back-end.
 
 Otras ferramentas utilizadas para documentação e gestão do projeto foram o Lucid para a criação do diagrama das entidades do banco de dados, Trello para a organização total do projeto e utilização da metodologia agil (Scrum) que foi fundamental para a conclusão desse projeto.
-## Documentação
-
-[Link Trello - Documentação do projeto](https://trello.com/invite/b/JVv3JPFo/ATTI042aac78b31b84f1c9b9a3cb459031f9A2F9DAD7/squad-tmnt)
-
 
 ## LinkedIn Autores
 
-- [@Dayane Stefane](https://github.com/Dayane99)
-- [@Denise Costa](https://github.com/DeniCosta)
-- [@Igor Souza](https://github.com/IgorSPinto)
-- [@Thaise Araújo](https://github.com/thayse342)
+- [@Dayane Stefane](https://www.linkedin.com/in/dayane-stefane/)
+- [@Denise Costa](https://www.linkedin.com/in/-denisecosta-/)
+- [@Igor Souza](https://www.linkedin.com/in/igor-de-souza-pinto-8407a0207/)
+- [@Thaise Araújo](https://www.linkedin.com/in/thaise-araujo-8152751bb/)
 
 
 ## Perfil do GitHub 
